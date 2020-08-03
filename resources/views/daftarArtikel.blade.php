@@ -53,7 +53,7 @@
                                 <td>{{ $data->excerpt }}</td>
                                 <td>
                                     @if ($data->thumbnail)
-                                        <img src="{{ asset('storage/' .$data->thumbnail) }}" width="150px" alt=""></td>
+                                        <img src="{{ asset('storage/gambar' .$data->thumbnail) }}" width="150px" alt=""></td>
 
                                     @else
                                         Tidak ada gambar
