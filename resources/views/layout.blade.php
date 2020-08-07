@@ -22,6 +22,12 @@
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
 
+    {{-- <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -37,7 +43,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-            <a class="navbar-brand" alt="Logo">Hi. {{ Auth::user()->name }}</a>
+            <a class="navbar-brand" alt="Logo">Posting Artikel</a>
             <a class="navbar-brand hidden" href="./"><img src="{{ asset('style/images/logo2.png') }}" alt="Logo"></a>
             </div>
 
@@ -48,11 +54,7 @@
                         <a href="{{ url('/artikel') }}"> <i class="menu-icon fa fa-laptop"></i>Daftar Artikel</a>
                     </li>
                     <li>
-                        <a href="{{ url('tambahArtikel') }}"> <i class="menu-icon fa fa-table"></i>Tambah</a>
-
-                    </li>
-                    <li>
-                        <a href="#"> <i class="menu-icon fa fa-th"></i>Forms</a>
+                        <a href="{{ url('/news') }}"> <i class="menu-icon fa fa-table"></i>Lihat Halaman Artikel</a>
 
                     </li>
                 </ul>
@@ -70,28 +72,10 @@
         <header id="header" class="header">
 
             <div class="header-menu">
-
-                <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-
-                </div>
-
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="{{ asset('style/images/admin.jpg') }}" alt="User Avatar">
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>{{ Auth::user()->name }}</a>
-
-                                <a class="nav-link" href=" {{ route('logout') }}"><i class="fa fa-power -off"></i>Logout</a>
-                        </div>
-                    </div>
+                <div style="float: right; margin-right: 30px;">
+                <a style="color: white;" href="{{ url('/news') }}">Artikel</a>
+                <a style="margin-left: 20px;" >Hi, {{ Auth::user()->name }}</a>
+                <a style="margin-left: 20px;" href="{{ url('/logout') }}">Logout</a>
                 </div>
             </div>
         </header><!-- /header -->

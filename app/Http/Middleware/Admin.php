@@ -20,6 +20,7 @@ class Admin
             return $next($request);
           }
 
-        return redirect('/artikel');
+        //return redirect('/artikel');
+        return abort(404);
     }
 }

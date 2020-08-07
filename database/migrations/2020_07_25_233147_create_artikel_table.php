@@ -19,6 +19,7 @@ class CreateArtikelTable extends Migration
             $table->text('thumbnail')->nullable();
             $table->text('title')->nullable();
             $table->text('excerpt')->nullable();
+            $table->text('content')->nullable();
             $table->enum('status', ['draft', 'published']);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

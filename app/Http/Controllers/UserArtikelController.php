@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Artikel;
+use App\User;
 use DB;
 use Auth;
-use User;
 use Illuminate\Http\Request;
 
 class UserArtikelController extends Controller
@@ -17,13 +17,29 @@ class UserArtikelController extends Controller
 
     public function index()
     {
-        $daftarArtikel = DB::table('artikel')->get();
+        // $daftarArtikel = DB::table('artikel')->get();
+        // return view('tampilArtikel', ['artikel' => $daftarArtikel]);
+
 
         //$req->session()->put('data',$req->input());
         //$daftarArtikel = DB::table('artikel')->get();
         // memanggil view index
         //return $daftarArtikel;
-        return view('tampilArtikel', ['artikel' => $daftarArtikel]);
+
+
+        // $artikel = Artikel::all();
+       // $artikel = Artikel::where('status', 'published')->get();
+
+        $artikel = Artikel::where('status', 'published')->orderBy('created_at', 'desc')->paginate(6);
+        return view('/tampilArtikel', compact('artikel'));
+    }
+
+    public function detail($slug)
+    {
+        $artikel = Artikel::where('slug', $slug)->get();
+        return view('/detailArtikel', compact('artikel'));
+        // return $artikel;
+        // die;
     }
 }
 

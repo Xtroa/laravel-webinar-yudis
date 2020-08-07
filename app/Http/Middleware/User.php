@@ -19,6 +19,7 @@ class User
             return $next($request);
           }
 
-        return redirect('/news');
+        //return redirect('/news');
+        return abort(404);
     }
 }

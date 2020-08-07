@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Artikel Yudis - News</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LARAVEL YUDIS</title>
@@ -47,48 +47,101 @@
         <nav class="navbar navbar-light bg-transparent headMenu">
             <div class="container">
                 <a class="navbar-brand " style="outline: none; border: none; box-shadow: none;">
-                <img src="{{ 'storage/gambar/headIcon.png' }}" width="30" height="30" class="d-inline-block align-top" alt="">
-                <h2 style="color: black;">Artikel Yudis</h2>
+                <img src="{{ asset('storage/gambar/headIcon.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+                <h2 style="color: white;">Artikel Yudis</h2>
                 </a>
-                <span class="navbar-text">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{ url('login') }}">Login</a>
-                        </li>
-                    </ul>
-                </span>
+                <div>
+                @if (Route::has('login'))
+                    @auth
+                        @if (Auth::user()->level == 'admin')
+                            <a style="color: white;" href="{{ url('/news') }}">Artikel</a>
+                            <a style="margin-left: 20px;color: white;" href="{{ url('/home') }}">Dashboard</a>
+                            <a style="margin-left: 20px; color: white;" >Hi, {{ Auth::user()->name }}</a>
+                            <a style="margin-left: 20px;color: white;" href="{{ url('/logout') }}">Logout</a>
+                        @else
+                            <a style="margin-left: 20px;color: white;" href="{{ url('/news') }}">Artikel</a>
+                            <a style="margin-left: 20px;color: white;" href="{{ url('/logout') }}">Logout</a>
+                        @endif
+                    @else
+                        <span class="navbar-text">
+                            <a style="color: white;" href="{{ url('login') }}">Login</a>
+                            @if (Route::has('register'))
+                                <a style="margin-left: 20px;color: white;" href="{{ route('register') }}">Register</a>
+                            @endif
+                        </span>
+                    @endauth
+                @endif
+                </div>
             </div>
         </nav>
     </header>
 
-    <div class="container main">
+    <div class="container main" >
 
 
-
+        <h3 style="margin-top: 20px;">Daftar Artikel : </h3>
             <div class="bd-example">
 
                 <div class="card-deck">
-                    @foreach ($artikel as $data)
-                    <div class="row col-md-4" style="margin-top: 50px">
+                    @if ($artikel->count() > 0 )
+                        @foreach ($artikel as $data)
+                        <div class="row col-md-4" style="margin-top: 30px; margin-bottom: 20px">
+                        <a href="/news/{{ $data->slug }}">
+                            <div class="card">
+                                {{-- <img src="{{ asset('storage/' .$data->thumbnail) }}" width="150px" alt=""></td> --}}
+                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="{{ asset('storage/' .$data->thumbnail) }}" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                <div class="card-body">
+                                    <h5  class="card-title" style="height:50px;">{{ $data->title }}</h5>
 
-                        <div class="card">
-                            <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22468%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20468%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1739c96ba50%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A23pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1739c96ba50%22%3E%3Crect%20width%3D%22468%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22175.171875%22%20y%3D%22100.134375%22%3E468x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
-                            <div class="card-body">
-                            <h5 class="card-title">{{ $data->title }}</h5>
-                            <p class="card-text">{{ $data->excerpt }}</p>
+                                    <p class="card-text" style="height:100px;">{{ substr($data->excerpt, 0, 125) }}</p>
+                                {{-- <p class="card-text">{{ $data->excerpt }}</p>
+                                <h5 class="card-title">{{ $data->title }}</h5> --}}
+                                </div>
+                                <div class="card-footer">
+                                    <small class="card-text" >{{ $data->created_at->format('d F Y ') }}, oleh : {{ $data->user->name }} </small>
+                                </div>
                             </div>
-                            <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
-
+                        </a>
+                        </div>
+                        @endforeach
+                    @else
+                    <div style="text-align: center; margin-top: 50px; margin-bottom: 80px;">
+                        <div class="alert alert-warning ">
+                            <strong>Maaf. </strong> Data Artikel belum tersedia untuk saat ini.
                         </div>
                     </div>
-                    @endforeach
+
+                    @endif
+
+
                 </div>
 
             </div>
+            <div class="pagination justify-content-center" style="margin-top: 30px; margin-bottom: 30px;">
+                {{ $artikel->links() }}
+            </div>
 
     </div>
+
+    <div class="row" style="background-color: dimgray; opacity: 0.7; filter: alpha(opacity=50);">
+        <div class="col-sm-4" style="margin-left: 15%; margin-top: 20px;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Contact</h5>
+              <p class="card-text">Email : ywibisono24@gmail.com</p>
+              <p class="card-text">(+62) 85156935120)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" style="margin-top: 20px;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Digunakan untuk</h5>
+              <p class="card-text">Pengumpulan Proyek Webinar Teknologi "Laravel Framework"</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
 </body>
 </html>

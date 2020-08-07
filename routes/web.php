@@ -11,8 +11,13 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/news');
 });
 
 Auth::routes();
@@ -24,7 +29,10 @@ Route::group(['middleware' => 'admin'], function()
     //artikel
     Route::get('/artikel','AdminArtikelController@index');
     Route::get('/tambahArtikel','AdminArtikelController@tambah');
-    Route::resource('artikeltbh', 'AdminArtikelController');
+    //Route::resource('artikel', 'AdminArtikelController');
+    //Route::get('/edit','AdminArtikelController@edit');
+    Route::get('/artikel/edit/{id}','AdminArtikelController@edit');
+    Route::post('/artikel/update','AdminArtikelController@update');
 
 
     //manage artikel
@@ -41,6 +49,6 @@ Route::group(['middleware' => 'admin'], function()
 
 //tampilan user tanpa middleware
 Route::get('/news','UserArtikelController@index');
-
+Route::get('/news/{slug}','UserArtikelController@detail');
 //logout
 Route::get('/logout', 'HomeController@logout');

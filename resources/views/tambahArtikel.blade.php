@@ -31,12 +31,20 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Title</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="judul" placeholder="Text" class="form-control"></div>
+                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="judul" placeholder="judul" class="form-control"></div>
                     </div>
+
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Excerpt</label></div>
-                        <div class="col-12 col-md-9"><textarea class="form-control summernote" name="isi" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Excerpt</label></div>
+                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="kutipan" placeholder="kutipan" class="form-control"></div>
                     </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Content</label></div>
+                        <div class="col-12 col-md-9"><textarea class="form-control summernote" name="isi" id="contentArtikel" rows="9" placeholder="konten" class="form-control"></textarea></div>
+                    </div>
+
+
 
 
                     <div class="row form-group">
@@ -59,4 +67,8 @@
         </div><!-- .animated -->
     </div><!-- .content -->
 
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'contentArtikel' );
+    </script>
 @endsection
