@@ -12,4 +12,4 @@ Fitur :
 4. Admin dapat melakukan perintah CRUD artikel.
 
 Catatan :
-- Sistem menggunakan store link untuk gambar. jadi sebelum run program diharapkan jalankan php artisan storage:link pada cmd / terminal
+- Sistem menggunakan store link untuk menyimpan gambar. jadi sebelum run program diharapkan jalankan php artisan storage:link pada cmd / terminal.
